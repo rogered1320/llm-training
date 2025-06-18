@@ -1,0 +1,43 @@
+
+Nombre: Juan Pérez
+Correo: juan.perez.dev@gmail.com
+Teléfono: +51 987 654 321
+LinkedIn: https://www.linkedin.com/in/juanperezdev
+GitHub: https://github.com/juanperezdev
+
+🎯 Perfil Profesional
+Desarrollador Frontend con más de 4 años de experiencia construyendo interfaces web modernas y responsivas. Especializado en React y Tailwind CSS, con conocimientos complementarios en desarrollo Backend con Node.js y Express. Apasionado por la experiencia de usuario, el rendimiento web y el trabajo en equipo ágil.
+
+💼 Experiencia Laboral
+
+Frontend Developer – TechNova Solutions (2022 - Actualidad)
+- Desarrollo de interfaces web responsivas usando React y TypeScript.
+- Implementación de diseño basado en componentes reutilizables con Tailwind.
+- Colaboración con diseñadores UX/UI para crear experiencias accesibles.
+- Integración de APIs RESTful y manejo de autenticación con JWT.
+
+Web Developer – DigitalMinds Agency (2020 - 2022)
+- Desarrollo y mantenimiento de sitios web corporativos con HTML, CSS, JavaScript y Vue.js.
+- Implementación de formularios interactivos y animaciones ligeras.
+- Participación en la migración de sitios legacy a frameworks modernos.
+
+Asistente de Desarrollo – SoftNet Peru (2019 - 2020)
+- Soporte en desarrollo de funcionalidades básicas en proyectos PHP y jQuery.
+- Corrección de bugs y mejora de estilos CSS.
+- Aprendizaje y aplicación de control de versiones con Git.
+
+🎓 Educación
+Bachiller en Ingeniería de Sistemas
+Universidad Nacional de Ingeniería — 2014 - 2019
+
+📚 Cursos y Certificaciones
+- Full Stack Web Development – CódigoLatino Bootcamp (2023)
+- Backend con Node.js y Express – Platzi (2022)
+- Introducción a Bases de Datos con PostgreSQL – Udemy (2021)
+- Responsive Web Design – freeCodeCamp (2020)
+
+🛠️ Habilidades Técnicas
+- Frontend: React, Next.js, Vue.js, JavaScript, TypeScript, Tailwind, Sass
+- Backend: Node.js, Express, MongoDB (básico), PostgreSQL (básico)
+- Herramientas: Git, GitHub, Figma, Vite, Webpack
+- Idiomas: Español (nativo), Inglés (intermedio)
