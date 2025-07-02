@@ -1,0 +1,56 @@
+[
+  {
+    "product_id": "1",
+    "product_name": "AuroraX Auriculares",
+    "comments": [
+      { "id": 1, "comment": "¡La calidad de sonido es fantástica! Suena claro y con buenos bajos." },
+      { "id": 2, "comment": "Muy cómodos, puedo usarlos durante horas sin molestias." },
+      { "id": 3, "comment": "La batería dura mucho, más de 20 horas sin recargar." },
+      { "id": 4, "comment": "La cancelación de ruido funciona de maravilla." },
+      { "id": 5, "comment": "Me encanta su diseño elegante y ligero." },
+      { "id": 6, "comment": "La conexión Bluetooth es estable y rápida." },
+      { "id": 7, "comment": "Excelente relación calidad-precio." },
+      { "id": 8, "comment": "Son resistentes y se sienten bien construidos." },
+      { "id": 9, "comment": "El micrófono capta mi voz claramente durante las llamadas." },
+      { "id": 10, "comment": "La configuración es sencilla a través de la aplicación." },
+      { "id": 11, "comment": "Vienen con un estuche de transporte muy práctico." },
+      { "id": 12, "comment": "Se desconectan frecuentemente y son incómodos de usar." }
+    ]
+  },
+  {
+    "product_id": "2",
+    "product_name": "TitanCraft Silla Gamer",
+    "comments": [
+      { "id": 1, "comment": "El asiento es muy incómodo después de solo unos minutos." },
+      { "id": 2, "comment": "La tela se desgastó después de un mes de uso." },
+      { "id": 3, "comment": "El reclinador no se mantiene en la posición deseada." },
+      { "id": 4, "comment": "No tiene soporte lumbar." },
+      { "id": 5, "comment": "Las ruedas se traban constantemente." },
+      { "id": 6, "comment": "Demasiado cara para la calidad que ofrece." },
+      { "id": 7, "comment": "El montaje fue confuso y faltaron instrucciones claras." },
+      { "id": 8, "comment": "El reposabrazos hace ruido al ajustar la altura." },
+      { "id": 9, "comment": "No es adecuada para largas sesiones de juego o trabajo." },
+      { "id": 10, "comment": "La base se siente endeble e insegura." },
+      { "id": 11, "comment": "El cojín de la cabeza es demasiado duro." },
+      { "id": 12, "comment": "El ajuste de altura es muy versátil y funciona perfectamente." }
+    ]
+  },
+  {
+    "product_id": "3",
+    "product_name": "ZenBrew Cafetera",
+    "comments": [
+      { "id": 1, "comment": "El café sale con un aroma increíble y sabor intenso." },
+      { "id": 2, "comment": "La cafetera se calienta rápido y es muy eficiente." },
+      { "id": 3, "comment": "Fácil de limpiar después de usar." },
+      { "id": 4, "comment": "El diseño es moderno y ocupa poco espacio." },
+      { "id": 5, "comment": "El volumen de café es perfectamente ajustable." },
+      { "id": 6, "comment": "Muy silenciosa al preparar el café." },
+      { "id": 7, "comment": "La jarra térmica mantiene la temperatura durante horas." },
+      { "id": 8, "comment": "Prepara buen café, aunque esperaba más cremosidad." },
+      { "id": 9, "comment": "Funciona bien, pero la limpieza es algo engorrosa." },
+      { "id": 10, "comment": "El depósito de agua es pequeño para mi gusto." },
+      { "id": 11, "comment": "La calidad general está bien, nada más." },
+      { "id": 12, "comment": "Cumple su función, pero no destaca sobre otras." }
+    ]
+  }
+]

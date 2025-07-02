@@ -1,0 +1,56 @@
+[
+  {
+    "product_id": "1",
+    "product_name": "AuroraX Headphones",
+    "comments": [
+      { "id": 1, "comment": "The sound quality is fantastic! It sounds clear with good bass." },
+      { "id": 2, "comment": "Very comfortable, I can wear them for hours without discomfort." },
+      { "id": 3, "comment": "The battery lasts a long time, over 20 hours without recharging." },
+      { "id": 4, "comment": "The noise cancellation works wonderfully." },
+      { "id": 5, "comment": "I love its sleek and lightweight design." },
+      { "id": 6, "comment": "The Bluetooth connection is stable and fast." },
+      { "id": 7, "comment": "Excellent value for money." },
+      { "id": 8, "comment": "They are sturdy and feel well-built." },
+      { "id": 9, "comment": "The microphone picks up my voice clearly during calls." },
+      { "id": 10, "comment": "Setup is straightforward through the app." },
+      { "id": 11, "comment": "They come with a very practical carrying case." },
+      { "id": 12, "comment": "They disconnect frequently and are uncomfortable to use." }
+    ]
+  },
+  {
+    "product_id": "2",
+    "product_name": "TitanCraft Gaming Chair",
+    "comments": [
+      { "id": 1, "comment": "The seat is very uncomfortable after just a few minutes." },
+      { "id": 2, "comment": "The fabric wore out after a month of use." },
+      { "id": 3, "comment": "The recliner doesn't stay in the desired position." },
+      { "id": 4, "comment": "There is no lumbar support." },
+      { "id": 5, "comment": "The wheels get stuck constantly." },
+      { "id": 6, "comment": "Too expensive for the quality it offers." },
+      { "id": 7, "comment": "Assembly was confusing and lacked clear instructions." },
+      { "id": 8, "comment": "The armrest makes noise when adjusting height." },
+      { "id": 9, "comment": "It’s not suitable for long gaming or work sessions." },
+      { "id": 10, "comment": "The base feels flimsy and unsafe." },
+      { "id": 11, "comment": "The head cushion is too hard." },
+      { "id": 12, "comment": "The height adjustment is very versatile and works perfectly." }
+    ]
+  },
+  {
+    "product_id": "3",
+    "product_name": "ZenBrew Coffee Maker",
+    "comments": [
+      { "id": 1, "comment": "The coffee comes out with an amazing aroma and intense flavor." },
+      { "id": 2, "comment": "The coffee maker heats up quickly and is very efficient." },
+      { "id": 3, "comment": "Easy to clean after use." },
+      { "id": 4, "comment": "The design is modern and takes up little space." },
+      { "id": 5, "comment": "The coffee volume is perfectly adjustable." },
+      { "id": 6, "comment": "Very quiet when brewing coffee." },
+      { "id": 7, "comment": "The thermal carafe keeps the temperature for hours." },
+      { "id": 8, "comment": "Brews good coffee, although I expected more creaminess." },
+      { "id": 9, "comment": "It works well, but cleaning is somewhat cumbersome." },
+      { "id": 10, "comment": "The water reservoir is small for my liking." },
+      { "id": 11, "comment": "The overall quality is fine, nothing more." },
+      { "id": 12, "comment": "It fulfills its function, but doesn’t stand out from others." }
+    ]
+  }
+]

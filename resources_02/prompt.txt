@@ -1,0 +1,47 @@
+user_role_message = \
+"""
+**User**:  
+I’m going to provide you with a list of product comments.  
+
+- **Task**: Analyze each comment’s sentiment.  
+- **Sentiment labels**: `"positive"`, `"negative"`, or `"neutral"`.  
+- **Output**: A JSON object matching the schema below, and nothing else.
+
+```json
+[[expected_output_format]]
+```
+
+- **Input placeholder**:  
+```
+Comments:
+    [[comments]]
+```
+
+- **Rules**:  
+1. Do not include any extra keys or metadata.  
+2. If a comment is ambiguous, classify it as `"neutral"`.  
+3. Ensure the JSON is syntactically valid.
+4. No ```json``` blocks
+5. No explanatory text
+
+**Example**  
+> **Input**  
+> Comments:  
+> 1. “Great quality, loved it!”  
+> 2. “Didn’t work as expected.”  
+> 3. “It’s okay, nothing special.”  
+
+> **Output**  
+> ```json
+> {
+>   "evaluated_comments": [
+>     { "comment_id": 1, "comment_type": "positive" },
+>     { "comment_id": 2, "comment_type": "negative" },
+>     { "comment_id": 3, "comment_type": "neutral" }
+>   ]
+> }
+> ```
+
+Now process the actual comments and return only the JSON.
+
+"""

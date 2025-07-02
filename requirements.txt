@@ -3,3 +3,8 @@ openai
 requests
 google-genai
 huggingface_hub
+langchain
+langchain-huggingface
+langchain-openai
+langchain-aws
+pydantic
