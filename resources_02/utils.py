@@ -74,7 +74,7 @@ def openai_chat(content: str, params: ChatParams):
 
     # Prepare the completion arguments
     completion_args = {
-        "model": "gpt-4o-mini",
+        "model": "gpt-4.1-nano",
         "messages": messages,
         "temperature": params.temperature,
     }

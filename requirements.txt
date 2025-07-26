@@ -8,3 +8,5 @@ langchain-huggingface
 langchain-openai
 langchain-aws
 pydantic
+mermaid-py
+scikit-learn
