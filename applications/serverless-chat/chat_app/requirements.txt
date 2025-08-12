@@ -1,0 +1,8 @@
+langchain
+langchain-huggingface
+langchain-openai
+langchain-aws
+pydantic
+langchain-community
+langchain-pinecone
+boto3

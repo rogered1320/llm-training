@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  serverless-chat
+
+  Sample SAM Template for serverless-chat (HTTP API v2)
+
+Parameters:
+  Stage:
+    Type: String
+    Default: dev
+
+Globals:
+  Function:
+    Timeout: 180 # Function timeout in seconds
+    Environment:
+      Variables:
+        STAGE: !Ref Stage
+        NO_LOCAL_ENV: 'true' # Used to determine if the function is running locally or in AWS Lambda
+  HttpApi:
+    CorsConfiguration:
+      AllowOrigins:
+        - 'http://localhost:3000'
+        - 'http://localhost:5173'
+      AllowHeaders:
+        - Content-Type
+        - Authorization
+        - X-Amz-Date
+        - X-Api-Key
+        - X-Amz-Security-Token
+      AllowMethods:
+        - OPTIONS
+        - GET
+        - POST
+      MaxAge: 86400
+      AllowCredentials: false
+
+Resources:
+  # Explicit HTTP API so the stage is part of the URL (e.g., /dev)
+  ChatHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref Stage
+      # CorsConfiguration is inherited from Globals.HttpApi above
+
+  ChatFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: chat_app/
+      Handler: app.lambda_handler
+      Runtime: python3.10
+      Architectures:
+        - x86_64
+      MemorySize: 384
+      Events:
+        ChatApp:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ChatHttpApi
+            Path: /chat
+            Method: POST
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - ssm:GetParameter
+                - ssm:GetParameters
+              Resource:
+                - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter*
+
+Outputs:
+  ChatAppApi:
+    Description: "HTTP API endpoint URL for the Chat App function"
+    Value: !Sub "https://${ChatHttpApi}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/chat"
+  ChatFunction:
+    Description: "Chat App Lambda Function ARN"
+    Value: !GetAtt ChatFunction.Arn
+  ChatFunctionIamRole:
+    Description: "Implicit IAM Role created for Chat App function"
+    Value: !GetAtt ChatFunctionRole.Arn

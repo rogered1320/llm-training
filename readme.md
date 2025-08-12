@@ -6,7 +6,14 @@ This repository is intended to store the class materials for a course on using L
 - **Class 01: Prompting**  
     Covers best practices for crafting effective prompts for LLMs, including prompt structure, clarity, specificity, and examples of different prompting techniques. See `01-prompting-best-practices.ipynb` for hands-on exercises and detailed explanations.
 
-- Additional classes coming soon
+- **Class 02: AI Flows with popular LLM SDKs**
+    Covers building your first AI workflow using popular LLM SDKs such as OpenAI and Hugging Face. Learn how to set up API keys, send requests to LLM endpoints, handle responses, and integrate LLMs into Python applications. See `02-first-ai-flow.ipynb` for step-by-step guidance and practical examples.
+- **Class 03: Introduction to LangChain**  
+    This class explores the advantages of using LangChain over working directly with LLM SDKs, as covered in previous sessions. You will learn how to monitor LLM calls with Langfuse, gaining valuable insights into execution times, token usage, and associated costs. The session also demonstrates how to refactor the previous case study to utilize LangChain, streamlining your workflow and enhancing observability.
+- **Class 04: LangChain Chains**  
+    This class focuses on building advanced workflows using LangChain chains. You will learn how to combine multiple chains that interact with LLMs and custom code, enabling structured text analysis and generation. The session covers best practices for designing efficient, reusable, and scalable pipelines, and demonstrates how LangChain orchestrates complex tasks and integrates language models into real-world applications. See `04-langchain-chains.ipynb` for hands-on exercises and practical examples.
+- **Class 05: RAG**
+    This class was divided in several documents, where we cover what is rag and vectorestores, the use of text splitters to populate vectorstores, flow to generate and populate vectorestores in Pinecone, 
 
 ## Getting Started
 

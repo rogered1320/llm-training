@@ -10,3 +10,9 @@ langchain-aws
 pydantic
 mermaid-py
 scikit-learn
+langchain-chroma
+langchain-community
+langchain-pinecone
+ipywidgets
+langchain-postgres
+psycopg[binary]
