@@ -1,130 +1,247 @@
-# serverless-chat
+# Serverless Chat Application
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
+A serverless AI-powered chat application built with AWS SAM that provides both question-answering (QA) and memory-based chat capabilities. The application uses LangChain, OpenAI, and Pinecone for intelligent responses and context management.
 
-- chat_app - Code for the application's Lambda function.
-- events - Invocation events that you can use to invoke the function.
-- tests - Unit tests for the application code. 
-- template.yaml - A template that defines the application's AWS resources.
+## 🚀 Features
 
-The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
+- **Question-Answering Chat**: AI-powered responses using RAG (Retrieval-Augmented Generation)
+- **Memory Chat**: Context-aware conversations with session management using DynamoDB
+- **Serverless Architecture**: Built on AWS Lambda with API Gateway
+- **Persistent Storage**: DynamoDB tables for chat history and session data
+- **Vector Search**: Pinecone integration for semantic document retrieval
+- **Environment Flexibility**: Supports both local development and AWS deployment
 
-If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.  
-The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds a simplified step-through debugging experience for Lambda function code. See the following links to get started.
+## 🏗️ Architecture
 
-* [CLion](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [GoLand](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [IntelliJ](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [WebStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [Rider](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PhpStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [RubyMine](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [DataGrip](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
-* [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
+The application consists of:
+- **Lambda Functions**: Core chat logic and API handling
+- **API Gateway**: RESTful API endpoints for chat interactions
+- **DynamoDB**: NoSQL database for storing chat sessions and conversation history
+- **Pinecone**: Vector database for document retrieval
+- **OpenAI**: LLM integration for intelligent responses
+- **LangChain**: Framework for building the RAG pipeline
 
-## Deploy the sample application
+## 📁 Project Structure
 
-The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
+```
+serverless-chat/
+├── chat_app/                 # Main application code
+│   ├── app.py               # Lambda handler and main logic
+│   ├── qa_chat.py          # Question-answering functionality
+│   ├── memory_chat.py      # Memory-based chat functionality
+│   ├── prompts.py          # AI prompt templates
+│   └── constants.py        # Configuration constants
+├── events/                  # Test events for local testing
+├── tests/                   # Test suite
+│   ├── unit/               # Unit tests
+│   ├── integration/        # Integration tests
+│   └── conftest.py         # Test configuration
+├── template.yaml            # SAM template for AWS resources
+├── samconfig.toml          # SAM deployment configuration
+└── requirements.txt         # Python dependencies
+```
 
-To use the SAM CLI, you need the following tools.
+## 🛠️ Prerequisites
 
-* SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-* [Python 3 installed](https://www.python.org/downloads/)
-* Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
+- **Python 3.8+** and pip
+- **AWS CLI** configured with appropriate credentials
+- **SAM CLI** installed
+- **Docker** (for local testing and building)
+- **Conda** (recommended for environment management)
 
-To build and deploy your application for the first time, run the following in your shell:
+## 🚀 Quick Start
+
+### 1. Clone and Setup
 
 ```bash
+git clone <your-repo-url>
+cd serverless-chat
+conda activate llm-training  # or your preferred environment
+```
+
+### 2. Install Dependencies
+
+```bash
+# Install application dependencies
+pip install -r chat_app/requirements.txt
+
+# Install test dependencies
+pip install -r tests/requirements.txt
+```
+
+### 3. Environment Configuration
+
+Create a `.env` file in the project root with your API keys:
+
+```bash
+OPENAI_API_KEY=your_openai_api_key
+PINECONE_API_KEY=your_pinecone_api_key
+LANGSMITH_API_KEY=your_langsmith_api_key
+```
+
+### 4. Local Development
+
+```bash
+# Build the application
 sam build --use-container
+
+# Start local API
+sam local start-api
+
+# Test locally
+curl -X POST http://localhost:3000/chat \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What is AI?", "chat_type": "qa"}'
+```
+
+## 🧪 Testing
+
+### Run Tests
+
+```bash
+# Activate conda environment
+conda activate llm-training
+
+# Run unit tests only (recommended for development)
+python -m pytest tests/unit/ -v
+
+# Run integration tests (requires real API keys)
+python -m pytest tests/integration/ -v
+
+# Run all tests
+python -m pytest tests/ -v
+
+# Run specific test file
+python -m pytest tests/unit/test_handler.py -v
+
+# Run specific test function
+python -m pytest tests/unit/test_handler.py::test_lambda_handler_valid_question -v
+```
+
+### Test Structure
+
+- **Unit Tests**: Mocked dependencies, fast execution
+- **Integration Tests**: Real API calls, requires configuration
+- **Test Coverage**: Covers Lambda handler, QA chat, and utility functions
+
+## 🚀 Deployment
+
+### First Time Deployment
+
+```bash
+# Build the application
+sam build --use-container
+
+# Deploy with guided setup
 sam deploy --guided
 ```
 
-The first command will build the source of your application. The second command will package and deploy your application to AWS, with a series of prompts:
+Follow the prompts to configure:
+- Stack name
+- AWS region
+- IAM role creation permissions
+- Save configuration to `samconfig.toml`
 
-* **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, and a good starting point would be something matching your project name.
-* **AWS Region**: The AWS region you want to deploy your app to.
-* **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review. If set to no, the AWS SAM CLI will automatically deploy application changes.
-* **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modifies IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
-* **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
-
-You can find your API Gateway Endpoint URL in the output values displayed after deployment.
-
-## Use the SAM CLI to build and test locally
-
-Build your application with the `sam build --use-container` command.
+### Subsequent Deployments
 
 ```bash
-serverless-chat$ sam build --use-container
+# Build and deploy
+sam build --use-container
+sam deploy
 ```
 
-The SAM CLI installs dependencies defined in `chat_app/requirements.txt`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
-
-Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
-
-Run functions locally and invoke them with the `sam local invoke` command.
+### Environment-Specific Deployment
 
 ```bash
-serverless-chat$ sam local invoke HelloWorldFunction --event events/event.json
+# Deploy to specific environment
+sam deploy --config-env prod
 ```
 
-The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
+## 📡 API Usage
+
+### Question-Answering Chat
 
 ```bash
-serverless-chat$ sam local start-api
-serverless-chat$ curl http://localhost:3000/
+curl -X POST https://your-api-gateway-url/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "Can I use short pants in the office?",
+    "chat_type": "qa"
+  }'
 ```
 
-The SAM CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property on each function's definition includes the route and method for each path.
-
-```yaml
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
-```
-
-## Add a resource to your application
-The application template uses AWS Serverless Application Model (AWS SAM) to define application resources. AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application resources such as functions, triggers, and APIs. For resources not included in [the SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use standard [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) resource types.
-
-## Fetch, tail, and filter Lambda function logs
-
-To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs` lets you fetch logs generated by your deployed Lambda function from the command line. In addition to printing the logs on the terminal, this command has several nifty features to help you quickly find the bug.
-
-`NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
+### Memory Chat
 
 ```bash
-serverless-chat$ sam logs -n HelloWorldFunction --stack-name serverless-chat --tail
+curl -X POST https://your-api-gateway-url/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "What did we talk about earlier?",
+    "chat_type": "memory",
+    "session_id": "b6122055-b273-4dff-b15c-446332cfb047"
+  }'
 ```
 
-You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
+## 🔧 Configuration
 
-## Tests
+### Environment Variables
 
-Tests are defined in the `tests` folder in this project. Use PIP to install the test dependencies and run tests.
+- `OPENAI_API_KEY`: OpenAI API key for LLM access
+- `PINECONE_API_KEY`: Pinecone API key for vector search
+- `LANGSMITH_PROJECT`: LangSmith project for tracing
+- `NO_LOCAL_ENV`: Set to "true" to use AWS SSM parameters
+
+### AWS Resources
+
+The `template.yaml` defines:
+- Lambda functions with appropriate IAM roles
+- API Gateway with REST endpoints
+- CloudWatch logging and monitoring
+- Environment variable management
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Import Errors**: Ensure you're running from the project root directory
+2. **API Key Issues**: Verify environment variables are set correctly
+3. **Pinecone Connection**: Check API key and index configuration
+4. **Local Testing**: Ensure Docker is running for SAM local commands
+
+### Logs and Debugging
 
 ```bash
-serverless-chat$ pip install -r tests/requirements.txt --user
-# unit test
-serverless-chat$ python -m pytest tests/unit -v
-# integration test, requiring deploying the stack first.
-# Create the env variable AWS_SAM_STACK_NAME with the name of the stack we are testing
-serverless-chat$ AWS_SAM_STACK_NAME=<stack-name> python -m pytest tests/integration -v
+# View Lambda logs
+sam logs -n ChatFunction --stack-name serverless-chat --tail
+
+# Local debugging
+sam local invoke ChatFunction --event events/event.json --debug
 ```
 
-## Cleanup
-
-To delete the sample application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
+## 🧹 Cleanup
 
 ```bash
+# Delete the CloudFormation stack
 aws cloudformation delete-stack --stack-name serverless-chat
+
+# Remove local build artifacts
+rm -rf .aws-sam/
 ```
 
-## Resources
+## 📚 Resources
 
-See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
+- [AWS SAM Developer Guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/)
+- [LangChain Documentation](https://python.langchain.com/)
+- [DynamoDB Documentation](https://docs.aws.amazon.com/dynamodb/)
+- [Pinecone Documentation](https://docs.pinecone.io/)
+- [OpenAI API Documentation](https://platform.openai.com/docs)
+- [Basic AWS Price Calculator](https://calculator.aws/#/estimate?id=3e84e445bed46ef64ef5fe4146ee7043b28df4df)
 
-Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Ensure all tests pass
+5. Submit a pull request
+

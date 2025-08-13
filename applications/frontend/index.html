@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="theme-color" content="#075e54" />
+    <title>Chatbot Demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">
+        <h3>Chat Assistant</h3>
+        <button id="resetButton" class="reset-button" title="Reiniciar chat">🔄</button>
+      </div>
+      <div id="chat-display" class="chat-messages"></div>
+      <div class="input-container">
+        <div class="input-wrapper">
+          <input
+            id="messageInput"
+            type="text"
+            placeholder="Escribe tu mensaje..."
+            autocomplete="off"
+            maxlength="500"
+          />
+          <div id="charCounter" class="char-counter">0/500</div>
+        </div>
+        <button id="sendButton" disabled>📤</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

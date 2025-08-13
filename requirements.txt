@@ -5,6 +5,7 @@ google-genai
 huggingface_hub
 langchain
 langchain-huggingface
+langchain-google-genai
 langchain-openai
 langchain-aws
 pydantic
@@ -16,3 +17,8 @@ langchain-pinecone
 ipywidgets
 langchain-postgres
 psycopg[binary]
+
+
+#for testing
+pytest
+pytest-mock

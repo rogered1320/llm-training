@@ -8,23 +8,60 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     margin: 0;
-    padding: 20px;
+    padding: 0;
     height: 100vh;
+    height: 100dvh; /* Soporte para viewport dinámico en móviles */
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .chat-container {
     width: 100%;
+    height: 100%;
     max-width: 500px;
-    height: 600px;
+    max-height: 600px;
     background: #ffffff;
-    border-radius: 20px;
+    border-radius: 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+/* Estilos para desktop */
+@media (min-width: 769px) {
+    body {
+        padding: 20px;
+    }
+    
+    .chat-container {
+        width: 100%;
+        max-width: 500px;
+        height: 600px;
+        max-height: 600px;
+        border-radius: 20px;
+    }
+}
+
+/* Estilos para móviles */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+        background: #ffffff;
+    }
+    
+    .chat-container {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh; /* Soporte para viewport dinámico */
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
 }
 
 .chat-header {
@@ -33,12 +70,73 @@ body {
     padding: 20px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .chat-header h3 {
     margin: 0;
     font-size: 18px;
     font-weight: 500;
+}
+
+.reset-button {
+    position: absolute;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.reset-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(180deg);
+}
+
+.reset-button:active {
+    transform: rotate(180deg) scale(0.95);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .chat-header {
+        padding: env(safe-area-inset-top, 20px) 20px 15px 20px;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .reset-button {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        right: 15px;
+    }
+    
+    .reset-button:hover {
+        transform: none; /* Quitar rotación en móviles */
+        background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .reset-button:active {
+        transform: scale(0.9);
+        background: rgba(255, 255, 255, 0.4);
+    }
 }
 
 .chat-messages {
@@ -48,6 +146,17 @@ body {
     background: #e5ddd5;
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.1"/></svg>');
     background-size: 40px 40px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .chat-messages {
+        padding: 15px;
+        flex: 1;
+        min-height: 0; /* Importante para permitir que flex funcione correctamente */
+    }
 }
 
 .message {
@@ -77,6 +186,16 @@ body {
     word-wrap: break-word;
     position: relative;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .message-bubble {
+        max-width: 85%;
+        padding: 10px 14px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
 }
 
 .message.user .message-bubble {
@@ -202,11 +321,57 @@ body {
     background: #f0f0f0;
     border-top: 1px solid #e0e0e0;
     gap: 10px;
+    flex-shrink: 0;
+}
+
+.input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.char-counter {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 6px;
+    border-radius: 10px;
+    pointer-events: none;
+    font-weight: 500;
+}
+
+.char-counter.warning {
+    color: #ff6b35;
+}
+
+.char-counter.limit {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .input-container {
+        padding: 15px;
+        padding-bottom: max(15px, env(safe-area-inset-bottom));
+        gap: 8px;
+        position: relative;
+    }
+    
+    .char-counter {
+        font-size: 11px;
+        right: 10px;
+        padding: 1px 4px;
+    }
 }
 
 input[type="text"] {
     flex: 1;
-    padding: 12px 16px;
+    width: 100%;
+    padding: 12px 70px 12px 16px; /* Espacio extra a la derecha para el contador */
     border: 1px solid #ddd;
     border-radius: 25px;
     font-size: 16px;
@@ -218,6 +383,15 @@ input[type="text"] {
 input[type="text"]:focus {
     border-color: #075e54;
     box-shadow: 0 0 0 2px rgba(7, 94, 84, 0.1);
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    input[type="text"] {
+        padding: 10px 60px 10px 14px; /* Ajustar padding para móviles */
+        font-size: 16px; /* Mantener 16px para evitar zoom en iOS */
+        border-radius: 20px;
+    }
 }
 
 button {
@@ -234,6 +408,7 @@ button {
     justify-content: center;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
 }
 
 button:hover:not(:disabled) {
@@ -245,6 +420,26 @@ button:disabled {
     background: #ccc;
     cursor: not-allowed;
     transform: none;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    button {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+        /* Evitar hover en dispositivos táctiles */
+        touch-action: manipulation;
+    }
+    
+    button:hover:not(:disabled) {
+        transform: none; /* Quitar efectos hover en móviles */
+    }
+    
+    button:active:not(:disabled) {
+        transform: scale(0.95);
+        background: #0a6b5d;
+    }
 }
 
 /* Cursor de escritura */
@@ -348,4 +543,71 @@ button:disabled {
 
 .chat-messages::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.5);
+}
+
+/* Estilos específicos para móviles */
+@media (max-width: 768px) {
+    /* Ocultar scrollbar en móviles */
+    .chat-messages::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+    
+    /* Mejorar la experiencia táctil */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Permitir selección de texto en mensajes */
+    .message-bubble {
+        -webkit-user-select: text;
+        user-select: text;
+    }
+    
+    /* Permitir escritura en el input */
+    input[type="text"] {
+        -webkit-user-select: auto;
+        user-select: auto;
+    }
+}
+
+/* Soporte para viewport dinámico en móviles */
+@supports (height: 100dvh) {
+    @media (max-width: 768px) {
+        body, .chat-container {
+            height: 100dvh;
+        }
+    }
+}
+
+/* Soporte específico para iOS Safari */
+@media (max-width: 768px) {
+    body, .chat-container {
+        height: calc(var(--vh, 1vh) * 100);
+    }
+}
+
+/* Clase para ajustar la altura cuando aparece el teclado */
+.keyboard-visible .chat-messages {
+    max-height: calc(100vh - 200px);
+    max-height: calc(100dvh - 200px);
+}
+
+/* Estilos para orientación landscape en móviles */
+@media (max-width: 768px) and (orientation: landscape) {
+    .chat-header {
+        padding: 10px 20px;
+        min-height: 50px;
+    }
+    
+    .input-container {
+        padding: 10px 15px;
+    }
+    
+    .chat-messages {
+        padding: 10px 15px;
+    }
 }

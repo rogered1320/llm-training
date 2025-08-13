@@ -1,24 +1,28 @@
 import json
-from qa_chat import run_qa_chatbot
+from chat_app.qa_chat import run_qa_chatbot
+from chat_app.memory_chat import run_memory_chatbot
 import boto3
 from botocore.exceptions import ClientError
 import os
-from constants import configure_remote_env_vars
+from chat_app.constants import configure_remote_env_vars
 ssm = boto3.client('ssm')
 os.environ["LANGSMITH_PROJECT"] = "serverless-chat"
 
 
 def lambda_handler(event, context):
     """AWS Lambda function handler for the serverless chat application."""
-    configure_env_vars()
+    
+    print("Lambda function started")
     body = event.get("body")
     if isinstance(body, str):
         body = json.loads(body)
-    parameters = event.get("queryStringParameters", {})
+    else:
+        body = body or {}
+
+    question = body.get("question", None)
     chat_type = body.get("chat_type", "qa")
-    question = body.get("question", "")
-    chat_id = body.get("chat_id", "")
-    print("Lambda function started", question)
+    session_id = body.get("session_id", "")
+
     if not question:
         return {
             "statusCode": 400,
@@ -26,8 +30,15 @@ def lambda_handler(event, context):
                 "message": "Bad Request: 'question' parameter is required",
             }),
         }
-    print("Running chatbot with the provided question")
-    response = run_qa_chatbot(question)
+
+    configure_env_vars()
+    print("Running chatbot with the provided question", chat_type, session_id)
+    if(chat_type == "qa"):
+        response = run_qa_chatbot(question)
+    elif(chat_type == "memory"):
+        response = run_memory_chatbot(question, session_id)
+    else:
+        response = "Unsupported chat type. Please use 'qa' for question-answering."
     print(f"Chatbot response: {response}")
     return {
         "statusCode": 200,
